@@ -1,0 +1,56 @@
+---
+title: "Analysis of life expentancy"
+author: "Joe Partlow"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Analysis of Life Expantancy by Continent
+
+Blah blah blah
+
+[Link to Url](https://www.google.com)
+[Link to Url2](https://www.google.com)
+
+## R Markdown
+
+
+
+
+```{r, echo=FALSE, message=FALSE}
+library(here)
+library(ggplot2)
+d <- readr::read_csv(here("data/gapminder/raw/gapminder_data.csv"))
+#names(d)
+
+#plot(geom_line(x, y, alpha, color, linetype, size ))
+#plot(geom_line(d.year, d.pop, alpha, color, linetype, size ))
+ggplot(data=d, aes(x= year,y = lifeExp, color = continent)) +
+  geom_line() +
+  facet_wrap( ~ country)
+
+```
+
+The data consists of years from `r range(d$year)`.
+
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
