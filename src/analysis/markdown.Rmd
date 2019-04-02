@@ -1,0 +1,51 @@
+---
+title: "Another R Markdown Example"
+author: "Joe Partlow"
+date: "4/2/2019"
+output: html_document
+bibliography: "../../outputs/library.bib"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(here)
+library(tidyverse)
+#in console
+#install.packages("pander")
+#install.packages("stargazer")
+#install.packages("beepr")
+
+library(pander)
+library(stargazer)
+library(beepr)
+
+d <- readr::read_csv(here("data/gapminder/raw/gapminder_data.csv"))
+
+```
+
+## Introduction
+
+Hans Rosling.[@Rosling2011]
+
+## Data
+
+The data consist of `r length(unique(d$country))` unique contries tracked from `r range(d$year)[1]` to `r range(d$year)[2]`.
+
+```{r}
+pander(summary(d))
+```
+
+## Results
+```{r }
+#Model m
+m <- lm(lifeExp ~ continent + year + pop, data = d)
+
+```
+
+```{r, results = "asis"}
+# Research
+stargazer(m, type = "html")
+```
+
+
+## Referrences
